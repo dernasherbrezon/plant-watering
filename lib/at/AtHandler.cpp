@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-// #include <Util.h>
+#include <esp32-hal-log.h>
 #include <string.h>
 #include <sys/time.h>
 #include <time.h>
@@ -26,9 +26,11 @@
 AtHandler::AtHandler() {
   if (PIN_SOILM != 0) {
     pinMode(PIN_SOILM, INPUT);
+    log_i("soil sensor configured on %d", PIN_SOILM);
   }
   if (PIN_PUMP != 0) {
     pinMode(PIN_PUMP, OUTPUT);
+    log_i("pump configured on %d", PIN_PUMP);
   }
   this->loadConfig();
 }

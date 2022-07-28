@@ -12,18 +12,6 @@ class AtHandler {
   void handle(Stream *in, Stream *out);
 
  private:
-//   void handleLoraFrames();
-//   void handlePull(Stream *in, Stream *out);
-//   void handleSetChip(size_t chip_index, Stream *out);
-//   void handleQueryChip(Stream *out);
-//   void handleQueryChips(Stream *out);
-//   void handleStopRx(Stream *in, Stream *out);
-//   void handleLoraRx(LoraState state, Stream *out);
-//   void handleLoraTx(char *message, LoraState state, Stream *out);
-//   void handleSetDisplay(bool enabled, Stream *out);
-//   void handleQueryTime(Stream *out);
-//   void handleSetTime(unsigned long time, Stream *out);
-
   void handlePumpOff(Stream *out);
   void handlePump(int timeout, Stream *out);
   void handleMaxSoilMoistureSetup(Stream *out);
