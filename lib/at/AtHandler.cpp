@@ -24,6 +24,12 @@
 #endif
 
 AtHandler::AtHandler() {
+  if (PIN_SOILM != 0) {
+    pinMode(PIN_SOILM, INPUT);
+  }
+  if (PIN_PUMP != 0) {
+    pinMode(PIN_PUMP, OUTPUT);
+  }
   this->loadConfig();
 }
 
