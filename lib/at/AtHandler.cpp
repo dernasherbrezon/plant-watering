@@ -23,6 +23,10 @@
 #define PIN_PUMP 0
 #endif
 
+// Taken from "Capacitive Soil Moisture Sensor v1.2"
+#define SOIL_MOISTURE_MIN_DEFAULT 2523
+#define SOIL_MOISTURE_MAX_DEFAULT 890
+
 AtHandler::AtHandler() {
   if (PIN_SOILM != 0) {
     pinMode(PIN_SOILM, INPUT);
@@ -181,7 +185,15 @@ void AtHandler::loadConfig() {
   if (!preferences.begin("plant-watering", true)) {
     return;
   }
-  this->minSoilMoisture = preferences.getInt("minsoilm", 0);
-  this->maxSoilMoisture = preferences.getInt("maxsoilm", 0);
+  this->minSoilMoisture = preferences.getInt("minsoilm", -1);
+  if (this->minSoilMoisture == -1) {
+    log_i("minimum moisture is not configured. use default: %d", SOIL_MOISTURE_MIN_DEFAULT);
+    this->minSoilMoisture = SOIL_MOISTURE_MIN_DEFAULT;
+  }
+  this->maxSoilMoisture = preferences.getInt("maxsoilm", -1);
+  if (this->maxSoilMoisture == -1) {
+    log_i("maximum moisture is not configured. use default: %d", SOIL_MOISTURE_MAX_DEFAULT);
+    this->maxSoilMoisture = SOIL_MOISTURE_MAX_DEFAULT;
+  }
   preferences.end();
 }
