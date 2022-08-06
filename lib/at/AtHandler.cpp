@@ -30,6 +30,7 @@ AtHandler::AtHandler() {
   }
   if (PIN_PUMP != 0) {
     pinMode(PIN_PUMP, OUTPUT);
+    digitalWrite(PIN_PUMP, LOW);
     log_i("pump configured on %d", PIN_PUMP);
   }
   this->loadConfig();
@@ -90,7 +91,7 @@ void AtHandler::handlePumpOff(Stream *out) {
     out->print("ERROR\r\n");
     return;
   }
-  digitalWrite(PIN_PUMP, HIGH);
+  digitalWrite(PIN_PUMP, LOW);
   out->print("OK\r\n");
 }
 
@@ -100,9 +101,9 @@ void AtHandler::handlePump(int timeout, Stream *out) {
     out->print("ERROR\r\n");
     return;
   }
-  digitalWrite(PIN_PUMP, LOW);
-  delay(timeout);
   digitalWrite(PIN_PUMP, HIGH);
+  delay(timeout);
+  digitalWrite(PIN_PUMP, LOW);
   out->print("OK\r\n");
 }
 
