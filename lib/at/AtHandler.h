@@ -18,6 +18,7 @@ class AtHandler {
   void handleMinSoilMoistureSetup(Stream *out);
   void handleSoilMoisture(Stream *out);
   void loadConfig();
+  int readSoilMoisture(Stream *out);
   size_t read_line(Stream *in);
   char buffer[BUFFER_LENGTH];
   bool receiving = false;
