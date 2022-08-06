@@ -143,23 +143,19 @@ size_t AtHandler::read_line(Stream *in) {
 }
 
 void AtHandler::handleSoilMoisture(Stream *out) {
-  if (PIN_SOILM_CTRL == 0) {
-    out->printf("soil moisture pin (PIN_SOILM) is not configured\r\n");
-    out->print("ERROR\r\n");
-    return;
+  int value = readSoilMoisture(out);
+  if (value < 0) {
+    return
   }
-  int value = analogRead(PIN_SOILM_CTRL);
   out->printf("%d\r\n", value);
   out->print("OK\r\n");
 }
 
 void AtHandler::handleMaxSoilMoistureSetup(Stream *out) {
-  if (PIN_SOILM_CTRL == 0) {
-    out->printf("soil moisture pin (PIN_SOILM_CTRL) is not configured\r\n");
-    out->print("ERROR\r\n");
-    return;
+  int value = readSoilMoisture(out);
+  if (value < 0) {
+    return
   }
-  int value = analogRead(PIN_SOILM_CTRL);
 
   preferences.begin("plant-watering", false);
   preferences.putInt("maxsoilm", value);
@@ -171,12 +167,10 @@ void AtHandler::handleMaxSoilMoistureSetup(Stream *out) {
 }
 
 void AtHandler::handleMinSoilMoistureSetup(Stream *out) {
-  if (PIN_SOILM_CTRL == 0) {
-    out->printf("soil moisture pin (PIN_SOILM_CTRL) is not configured\r\n");
-    out->print("ERROR\r\n");
-    return;
+  int value = readSoilMoisture(out);
+  if (value < 0) {
+    return
   }
-  int value = analogRead(PIN_SOILM_CTRL);
 
   preferences.begin("plant-watering", false);
   preferences.putInt("minsoilm", value);
