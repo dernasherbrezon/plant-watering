@@ -145,7 +145,7 @@ size_t AtHandler::read_line(Stream *in) {
 void AtHandler::handleSoilMoisture(Stream *out) {
   int value = readSoilMoisture(out);
   if (value < 0) {
-    return
+    return;
   }
   out->printf("%d\r\n", value);
   out->print("OK\r\n");
@@ -154,7 +154,7 @@ void AtHandler::handleSoilMoisture(Stream *out) {
 void AtHandler::handleMaxSoilMoistureSetup(Stream *out) {
   int value = readSoilMoisture(out);
   if (value < 0) {
-    return
+    return;
   }
 
   preferences.begin("plant-watering", false);
@@ -169,7 +169,7 @@ void AtHandler::handleMaxSoilMoistureSetup(Stream *out) {
 void AtHandler::handleMinSoilMoistureSetup(Stream *out) {
   int value = readSoilMoisture(out);
   if (value < 0) {
-    return
+    return;
   }
 
   preferences.begin("plant-watering", false);
